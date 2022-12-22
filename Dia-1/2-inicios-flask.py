@@ -8,5 +8,12 @@ app = Flask(__name__)
 def inicio():
     return 'Hola desde mi servidor de Flask'
 
+@app.route('/mostrar-hora', methods=['GET','POST'])
+def mostrarHora():
+    #no se suele retornar strings (caden de texto) sino que se utiliza diccionarios
+    return{
+        'content': '22:50:15'
+    }
+
 #debug = cada vez que modifica mos algun archivo  del proyecto y guardamos, se reiniciara el servidor
 app.run(debug=True)

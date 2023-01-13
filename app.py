@@ -9,7 +9,7 @@ from models.categoria_model import Categoria
 from models.productos_model import Producto
 from models.categoria_producto_model import CategoriaProducto
 
-from controllers.categoria_controller import CategoriasController
+from controllers.categoria_controller import CategoriasController, CategoriaController
 
 #aca utilizaremos el archivo .env para agregarlo a las variables de entorno
 load_dotenv()
@@ -35,6 +35,7 @@ def inicializadora():
     pass
 
 api.add_resource(CategoriasController, '/categorias')
+api.add_resource(CategoriaController, '/categoria/<int:id>')
 
 if __name__ == '__main__':
     app.run(debug = True)

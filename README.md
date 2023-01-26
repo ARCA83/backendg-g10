@@ -46,7 +46,16 @@ INSTALLED_ADDS =[
 python manage.py makemigrations
 python manage.py migrate
 ```
-
+## Installar Django Rest Framework
+```
+pip install djangorestframework
+```
+```python
+INSTALLED_APPS = [
+    ...
+    'rest_framework',
+]
+```
 
 
 

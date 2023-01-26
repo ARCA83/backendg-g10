@@ -21,4 +21,32 @@ django-admin startproject django_intro
 2(cd django_intro/)
 python manage.py runserver
 ```
+## Migrar los modelos
+```
+Migrar cambios
+```
+## Crear superuser
+```
+python manage.py createsuperuser
+```
+## Crear aplicacion(app)
+```
+python manage.py startapp almacen(nombre app)
+```
+## Registramos nuestra app en INSTALLED_APPS
+
+```python
+INSTALLED_ADDS =[
+    ...,
+    'almacen'
+]
+```
+## Crear nuestro nuevo modelo y migrar
+```
+python manage.py makemigrations
+python manage.py migrate
+```
+
+
+
 

@@ -9,6 +9,7 @@ python -m venv venv
 venv\Scripts\activate
 source venv/Scripts/activate
 source venv/bin/activate
+deactivate
 ```
 ## Instalar Django
 ```
@@ -17,13 +18,14 @@ pip freeze > requirements.txt
 ```
 ## Crear nuestro proyecto
 ```
-django-admin startproject django_intro
+django-admin startproject django_intro(nombre proyecto)
 2(cd django_intro/)
 python manage.py runserver
 ```
 ## Migrar los modelos
 ```
-Migrar cambios
+python manage.py makemigrations
+python manage.py migrate
 ```
 ## Crear superuser
 ```
@@ -33,7 +35,7 @@ python manage.py createsuperuser
 ```
 python manage.py startapp almacen(nombre app)
 ```
-## Registramos nuestra app en INSTALLED_APPS
+## Registramos nuestra app en INSTALLED_APPS `settings.py`
 
 ```python
 INSTALLED_ADDS =[
@@ -50,6 +52,8 @@ python manage.py migrate
 ```
 pip install djangorestframework
 ```
+## Registramos nuestra app en INSTALLED_APPS `settings.py`
+
 ```python
 INSTALLED_APPS = [
     ...

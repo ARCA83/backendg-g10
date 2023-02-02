@@ -1,5 +1,9 @@
 from rest_framework import serializers
-from .models import ProductosModel, CategoriasModel, ClientesModel, OrdenesModel
+from .models import (
+    ProductosModel, CategoriasModel, 
+    ClientesModel, OrdenesModel,
+    DetallesOrdenModel
+    )
 
 
 class ProductosSerializer(serializers.ModelSerializer):
@@ -25,7 +29,14 @@ class ClientesSerializer(serializers.ModelSerializer):
         model = ClientesModel
         fields = '__all__'
 
+class DetallesOrdenSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DetallesOrdenModel
+        fields = '__all__'
+
 class OrdenesSerializer(serializers.ModelSerializer):
+    cliente = ClientesSerializer(source='id')
+    detalle = DetallesOrdenSerializer(many=True)
     class Meta:
         model = OrdenesModel
         fields = '__all__'

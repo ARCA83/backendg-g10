@@ -60,6 +60,20 @@ INSTALLED_APPS = [
     'rest_framework',
 ]
 ```
+ ## Documentar nuestra API CON Swagger y Redoc
+ ```
+ pip install drf-yasg
+
+ ```
+## Configurar la libreria
+```python
+INSTALLED_APPS = [
+   ...
+   'django.contrib.staticfiles',  # required for serving swagger ui's css/js files
+   'drf_yasg',
+   ...
+]
+```
 
 
 

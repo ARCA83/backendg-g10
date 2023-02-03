@@ -23,7 +23,7 @@ class PlatoModel(models.Model):
    # id = models.AutoField(primary_key=True, null=False)
    nombre = models.CharField(max_length=50, unique=True, null=False)
    precio = models.FloatField()
-   disponiblidad = models.BooleanField(defaul=True)
+   disponiblidad = models.BooleanField(default=True)
    #auto_now_add > cada vez que cree un nuevo registro su valor sera la hora y fecha actual del servidor de base de datos por lo que ya no nos tenemos que procupar en colocar fecha
    #db_column > indicar  como se tiene que llamar sta columna en la base de datos solamente si queremos cambiar el nombre del atributo
    fechaCreacion= models.DateTimeField(auto_now_add=True, db_column='fecha_creacion')
@@ -36,3 +36,6 @@ class PlatoModel(models.Model):
    # DO_NOTHING > permite la eliminacion PERO no hace nada osea mantiene el mismo numero de categoria en el plato a pesar que este no exista generando un problema de integridad
 
    categoria = models.ForeignKey(to=CategoriaModel, on_delete=models.PROTECT,db_column='categoria_id')
+   
+   class Meta:
+        db_table ='platos'

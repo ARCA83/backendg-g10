@@ -32,11 +32,11 @@ class ClientesSerializer(serializers.ModelSerializer):
 class DetallesOrdenSerializer(serializers.ModelSerializer):
     class Meta:
         model = DetallesOrdenModel
-        fields = '__all__'
+        fields = ['cantidad','producto_id']
 
 class OrdenesSerializer(serializers.ModelSerializer):
     cliente = ClientesSerializer(source='id')
-    detalle = DetallesOrdenSerializer(many=True)
+    detalle = DetallesOrdenSerializer(many=True, write_only=True)
     class Meta:
         model = OrdenesModel
-        fields = '__all__'
+        exclude = ['estado', 'cliente_id']

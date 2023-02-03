@@ -4,7 +4,7 @@ from rest_framework import generics, status
 from rest_framework.response import Response
 from .models import ProductosModel, CategoriasModel, ClientesModel, OrdenesModel
 from .serializers import ProductosSerializer, CategoriasSerializer, ClientesSerializer, OrdenesSerializer
-
+from pprint import pprint
 
 def renderHtml(request):
     return HttpResponse("<button>Dame click</button>")
@@ -47,7 +47,7 @@ class CategoriasView(generics.GenericAPIView):
                 error = error + ' ' + campo + ', '
             return Response({
                 'message': error
-            })
+            }, status=status.HTTP_400_BAD_REQUEST)
         except Exception as e:
             return Response({
                 'message': 'Internal server error',
@@ -110,10 +110,21 @@ class OrdenesView(generics.GenericAPIView):
 
     def post(self, request):
         try:
-            print(request.data)
+            orden = self.get_serializer(data=request.data)
+            if orden.is_valid():
+                cliente = ClientesModel(**request.data['cliente'])
+                cliente.save()
+                print(cliente)
+                return Response({
+                    'message':'Operacion exitosa'
+                },status=status.HTTP_201_CREATED)
+            error = 'Faltan Campos'
+            for campo in orden.errors:
+                error = error + ' ' + campo + ', '
             return Response({
-                'message':'Operacion exitosa'
-            },status=status.HTTP_201_CREATED)
+                'message': error
+            }, status=status.HTTP_400_BAD_REQUEST)
+            
         except Exception as e:
             return Response ({  
                 'message': 'Internal server error',

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import CategoriaModel, PlatoModel
+from .models import CategoriaModel, PlatoModel, UsuarioModel
 
 class CategoriaSerializer(serializers.ModelSerializer):
     # cuando utilizamos un serializador basandonos en un modelo se declara la clase Meta
@@ -36,3 +36,14 @@ class CategoriaConPlatosSerializer(serializers.ModelSerializer):
         model= CategoriaModel
         fields= '__all__'
         
+class RegistroUsuarioSerializer(serializers.ModelSerializer):
+    class Meta:
+        fields = '__all__'
+        model = UsuarioModel
+        #E
+
+        extra_kwargs ={
+            'password':{
+                'write_only':True
+            }
+        }

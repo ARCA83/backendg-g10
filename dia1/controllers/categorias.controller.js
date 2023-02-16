@@ -32,15 +32,47 @@ export const buscarCategoriasPorid = async(req, res)=>{
         const {id}=req.params
         const resultado =await conexion.categoria.findFirst({where: {id:+id}})
         if(!resultado){
-            res.json({
+            return res.json({
                 message:'Categoria no existe',
             })
         }
+    // no se puede enviar dos o mas respuestas al cliente porque la conexion  ya termino    
+        else{
+        return res.json({
+            content:resultado,
+        })
+    }
+}
+export const actualizarCategoria = async(req,res)=>{
+    const {id}= req.params
+    const {body}=req
+    //buscar primero si la categoria existe, si no existe retornar un message diciendo que no existe
 
-    res.json({
-        content:resultado,
+    const categoria = await conexion.categoria.findFirst({
+        data:{nombre:body.nombre},where:{id:+id}
+    })
+    if (!categoria) {
+      return res.json({
+        message: "La Categoria no existe",
+      });
+    }
+     else{
+    return res.json({
+        content: resultado,
+    })
+    }
+    }
+export const eliminarCategoria=async(req,res)=>{
+    const { id } = req.params
+    const categoriaEncontrada=await conexion.categoria.findFirst({ where: { id: +id } })
+    if (!categoriaEncontrada){
+        return res.json({
+            message:'La categoria no existe',
+        })
+    }
+    await conexion.categoria.delete({where:{id:+id}})
+
+    return res.json({
+        message:'Categoria eliminada exitosamente',
     })
 }
-//module.exports ={
-//    crearCategoria,
-//}

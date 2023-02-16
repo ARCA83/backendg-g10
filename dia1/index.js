@@ -1,6 +1,6 @@
 import express from 'express'
 import prisma from '@prisma/client'
-import { buscarCategoriasPorid, crearCategoria, listarCategorias } from './controllers/categorias.controller.js';
+import { actualizarCategoria, buscarCategoriasPorid, crearCategoria, eliminarCategoria, listarCategorias } from './controllers/categorias.controller.js';
 
 //asi se importa utilizan comonjs
 
@@ -28,7 +28,7 @@ servidor.get("/", (req, res) => {
 });
 
 servidor.route('/categorias').post(crearCategoria).get(listarCategorias)
-servidor.route('/categoria/:id').get(buscarCategoriasPorid)
+servidor.route('/categoria/:id').get(buscarCategoriasPorid).put(actualizarCategoria).delete(eliminarCategoria)
 
 servidor.post("/productos", (req, res) => {
   console.log(req.body);

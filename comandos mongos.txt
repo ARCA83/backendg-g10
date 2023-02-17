@@ -1,0 +1,4 @@
+db > muestra la base de datas en la que me encuentfa-rotate-180
+shows dbs > listar todas las bases de datos que tenemos 
+
+

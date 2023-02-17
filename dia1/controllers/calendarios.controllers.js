@@ -1,6 +1,6 @@
 const calendarios = [
   {
-    correo: "ederiveroman@gmail.com",
+    correo: "anthoncruz@gmail.com",
     tareas: [
       {
         titulo: "Ir a la piscina",
@@ -25,10 +25,8 @@ const calendarios = [
   },
 ];
 
-export const devolverCalendarios = async (req, res)=>{
-
-    return res.json({
-        message:"Llegaste al final",
-    });
-
+export const devolverCalendarios = async (req, res) => {
+  return res.json({
+    message: "Llegaste al final!",
+  });
 };

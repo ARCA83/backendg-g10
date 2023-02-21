@@ -2,8 +2,10 @@ import mongoose from "mongoose";
 
 const diasSchema = new mongoose.Schema(
   {
-    dia: mongoose.Schema.Types.String,
-    enum: ["LUN", "MAR", "MIE", "JUE", "VIE", "SAB", "DOM"],
+    dia: {
+      type: mongoose.Schema.Types.String,
+      enum: ["LUN", "MAR", "MIE", "JUE", "VIE", "SAB", "DOM"],
+    },
   },
   { _id: false } // no se requiere crear el atributo _id para cuando se cree un diaSchema
 );
@@ -27,6 +29,12 @@ const calendarioSchema = new mongoose.Schema({
   dias: {
     type: [diasSchema],
   },
+
+  // Indicando a que usuairio le pertenece este calendario y cuando querramos devolver el calendario con el usuario sera mas practico hacer la busqueda
+  usuario:{
+    type:mongoose.Schema.Types.ObjectId,
+    required:true
+  }
 });
 
 export const CalendarioModel = mongoose.model("calendarios", calendarioSchema);

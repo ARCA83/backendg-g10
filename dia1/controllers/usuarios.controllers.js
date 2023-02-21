@@ -25,7 +25,7 @@ export const registroUsuario = async (req, res) => {
         .status(400);
     }
     return res
-      .jon({
+      .json({
         message: "Error al crear el usuario, intentenlo nuevamente",
       })
       .status(400);

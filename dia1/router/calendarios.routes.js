@@ -26,3 +26,9 @@ calendariosRouter
 //  .route("/calendarios")
 //  .post(validarToken, calendariosController.crearCalendario)
 //  .get(validarToken, calendariosController.devolverCalendarios);
+
+
+calendariosRouter
+.route("/calendario/:id")
+.put(calendariosController.actualizarCalendario)
+.delete(calendariosController.eliminarCalendario);

@@ -1,8 +1,9 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { UsuarioModel } from "../models/usuarios.model.js";
+import {} from "../utils/correos.js";
 
-const usuarios = [];
+
 
 export const registroUsuario = async (req, res) => {
   // {'nombre': 'eduardo', 'apellido': 'de rivero', 'correo': 'ederiveroman@gmail.com', 'password':'Welcome123'}
@@ -36,8 +37,7 @@ export const login = async (req, res) => {
   // { "correo": "anthoncruz@gmail.com", "password": "holahola"}
   const data = req.body;
 
-  // TODO : reemplazar por base de datos
-  // encontrar el usuario en el arreglo
+ 
   const usuarioEncontrado = await UsuarioModel.findOne({ correo:data.correo});
 
   if (!usuarioEncontrado) {
@@ -58,7 +58,7 @@ export const login = async (req, res) => {
       mensaje: "hola",
     };
     // aca creo la token
-    const token = jwt.sign(payload, "ultramegasupersecreto", {
+    const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, {
       expiresIn: "1h",
     });
 

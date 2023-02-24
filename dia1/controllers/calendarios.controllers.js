@@ -65,3 +65,63 @@ export const crearCalendario = async (req, res) => {
     content: calendario_creado,
   });
 };
+
+export const actualizarCalendario = async (req, res) => {
+  const { id } = req.params;
+  console.log(id);
+  try {
+    const calendario = await CalendarioModel.findOne({
+      _id: id,
+      usuario: req.user._id,
+    });
+
+    if (!calendario) {
+      return res.status(404).json({
+        message: "Calendario no existe",
+      });
+    }
+
+    const calendario_actualizado = await CalendarioModel.updateOneAndUpdate(
+      { _id: calendario._id },
+      data,
+      { new: true }
+    );
+
+    console.log(calendario);
+
+    return res.json({
+      message: "Calendario actualizado exitosamente",
+      content: calendario_actualizado,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      message: "Error al crear el calendario",
+    });
+  }
+};
+
+export const eliminarCalendario = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const resultado = await CalendarioModel.deleteOne({
+      _id: id,
+      usuario: req.user._id,
+    });
+
+    if (resultado.deletedCount===0){
+      return res.json({
+        message: "Calendario no existe"
+      });
+    }
+
+    return res.json({
+      message: "Calendario eliminado exitosamente",
+      content: resultado,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      message: "Error al eliminar el calendario",
+    });
+  }
+};
